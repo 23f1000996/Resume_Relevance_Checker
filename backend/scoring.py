@@ -1,15 +1,18 @@
-def calculate_score(hard_score, semantic_score, total_skills, matched_skills):
-    hard_weight, semantic_weight = 0.6, 0.4
-    skill_score = (len(matched_skills) / total_skills) * 100 if total_skills > 0 else 0
-    
-    final_score = (hard_weight * skill_score) + (semantic_weight * semantic_score)
-    
-    if final_score > 75:
+# backend/scoring.py
+
+def calculate_score(matched_count: int, total_skills: int, semantic_score: float, hard_weight: float = 0.6):
+    """Combine hard-skill match percent and semantic score into final 0-100 score.
+
+    hard_weight — fraction weight for skills (0..1). remainder goes to semantic.
+    """
+    skill_pct = (matched_count / total_skills) * 100 if total_skills and total_skills > 0 else 0.0
+    final = round(hard_weight * skill_pct + (1 - hard_weight) * float(semantic_score), 2)
+
+    if final >= 75:
         verdict = "High"
-    elif final_score > 50:
+    elif final >= 50:
         verdict = "Medium"
     else:
         verdict = "Low"
-    
-    return round(final_score, 2), verdict
 
+    return final, verdict
