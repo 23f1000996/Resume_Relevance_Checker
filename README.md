@@ -1,6 +1,3 @@
-Here’s a concise version of your **Automated Resume Relevance Checker** README in Markdown:
-
-````markdown
 # Automated Resume Relevance Checker
 
 An AI-powered system to evaluate resumes against job descriptions, combining **rule-based keyword matching** with a **Large Language Model (LLM)** for semantic analysis.
